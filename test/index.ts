@@ -99,6 +99,18 @@ describe("Courage", () => {
     await expectTokenAtIndex(owner1Index, BigNumber.from(1).shl(160).sub(1));
   });
 
+  it("returns a tokenURI", async () => {
+    // Just a smoke test.
+    const uri = await courage.tokenURI(owner1.address);
+    expect(uri.length > 0);
+  });
+
+  it("returns a contractURI", async () => {
+    // Just a smoke test.
+    const uri = await courage.contractURI();
+    expect(uri.length > 0);
+  });
+
   function transfer(
     from: SignerWithAddress,
     to: SignerWithAddress,
