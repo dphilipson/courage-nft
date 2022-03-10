@@ -1,9 +1,11 @@
-node_modules
-.env
-coverage
-coverage.json
-typechain
+# OS X
+.DS_Store
 
-#Hardhat files
-cache
-artifacts
+# NPM/Yarn
+node_modules
+yarn-error.log
+
+.env
+
+# Local Netlify folder
+.netlify

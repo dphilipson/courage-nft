@@ -1,5 +1,5 @@
+import { exec } from "child_process";
 import * as dotenv from "dotenv";
-
 import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
@@ -17,6 +17,12 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   for (const account of accounts) {
     console.log(account.address);
   }
+});
+
+// Extend the compile task to copy artifacts to frontend.
+task("compile").setAction(async (_, __, runSuper) => {
+  await runSuper();
+  exec("scripts/copy-artifacts-to-dependents.sh");
 });
 
 // You need to export an object to set up your config
