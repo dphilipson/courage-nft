@@ -9,6 +9,12 @@ contract Courage is ERC721ForAll("Courage 0.0.3", "COUR-0.0.3") {
     using Strings for uint256;
     using DataURIs for string;
 
+    function testo(
+        bool firstBoolean,
+        address addr,
+        bool secondBoolean
+    ) public {}
+
     function contractURI() public view returns (string memory) {
         return
             string(

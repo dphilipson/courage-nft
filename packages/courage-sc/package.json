@@ -5,7 +5,8 @@
   "author": "David Philipson <david.philipson@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "prepare": "TS_NODE_TRANSPILE_ONLY=1 hardhat compile",
+    "compile": "TS_NODE_TRANSPILE_ONLY=1 hardhat compile",
+    "prepare": "yarn compile",
     "test": "TS_NODE_TRANSPILE_ONLY=1 hardhat test --parallel",
     "test-gas": "TS_NODE_TRANSPILE_ONLY=1 REPORT_GAS=1 hardhat test"
   },
