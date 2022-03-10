@@ -5,7 +5,7 @@ import "./DataURIs.sol";
 import "./ERC721ForAll.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract Courage is ERC721ForAll("Courage", "COUR") {
+contract Courage is ERC721ForAll("Courage 0.0.3", "COUR-0.0.3") {
     using Strings for uint256;
     using DataURIs for string;
 
@@ -14,7 +14,7 @@ contract Courage is ERC721ForAll("Courage", "COUR") {
             string(
                 abi.encodePacked(
                     "{\n"
-                    '  "name": "Courage",\n'
+                    '  "name": "Courage v0.0.3",\n'
                     '  "description": "You had it all along, even if you didn\'t know it.",\n',
                     '  "seller_fee_basis_points": 100,\n'
                     '  "fee_recipient": "0x696532E83Dd722eaCA2AA611fE381DfAAD143e6C",\n'

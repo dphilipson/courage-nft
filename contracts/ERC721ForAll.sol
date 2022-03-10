@@ -74,6 +74,14 @@ contract ERC721ForAll is
         _symbol = symbol_;
     }
 
+    function announceTokens(uint256[] calldata tokenIds) public {
+        for (uint256 i = 0; i < tokenIds.length; i++) {
+            uint256 tokenId = tokenIds[i];
+            address owner = ownerOf(tokenId);
+            emit Transfer(owner, owner, tokenId);
+        }
+    }
+
     /**
      * @dev See {IERC165-supportsInterface}.
      */
@@ -219,7 +227,6 @@ contract ERC721ForAll is
         address to,
         uint256 tokenId
     ) public override {
-        //solhint-disable-next-line max-line-length
         require(
             _isApprovedOrOwner(_msgSender(), tokenId),
             "ERC721: transfer caller is not owner nor approved"

@@ -1,9 +1,13 @@
 {
   "name": "courage-nft",
   "license": "MIT",
+  "scripts": {
+    "test": "TS_NODE_TRANSPILE_ONLY=1 hardhat test --parallel",
+    "test-gas": "TS_NODE_TRANSPILE_ONLY=1 REPORT_GAS=1 hardhat test"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
-    "@nomiclabs/hardhat-etherscan": "^3.0.0",
+    "@nomiclabs/hardhat-etherscan": "^3.0.3",
     "@nomiclabs/hardhat-waffle": "^2.0.0",
     "@typechain/ethers-v5": "^7.0.1",
     "@typechain/hardhat": "^2.3.0",
@@ -17,7 +21,7 @@
     "chai-as-promised": "^7.1.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.29.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
@@ -25,8 +29,8 @@
     "eslint-plugin-promise": "^5.1.0",
     "ethereum-waffle": "^3.0.0",
     "ethers": "^5.0.0",
-    "hardhat": "^2.9.0",
-    "hardhat-gas-reporter": "^1.0.4",
+    "hardhat": "^2.9.1",
+    "hardhat-gas-reporter": "^1.0.8",
     "prettier": "^2.3.2",
     "prettier-plugin-solidity": "^1.0.0-beta.13",
     "solhint": "^3.3.6",

@@ -22,22 +22,29 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
+const { ETHERSCAN_API_KEY, RINKEBY_URL, TESTNET_PRIVATE_KEY } = process.env;
+
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
   networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    rinkeby: {
+      url: notNull(RINKEBY_URL),
+      accounts: [notNull(TESTNET_PRIVATE_KEY)],
     },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     currency: "USD",
   },
-  etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
-  },
+  etherscan: { apiKey: notNull(ETHERSCAN_API_KEY) },
 };
+
+function notNull<T>(x: T | null | undefined): T {
+  if (x == null) {
+    throw new Error("Unexpected absent value.");
+  }
+  return x;
+}
 
 export default config;

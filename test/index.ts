@@ -26,11 +26,6 @@ describe("Courage", () => {
     await courage.deployed();
   });
 
-  it("returns the correct name and symbol", async () => {
-    expect(await courage.name()).to.equal("Courage");
-    expect(await courage.symbol()).to.equal("COUR");
-  });
-
   it("starts with tokens for everyone except the burn address", async () => {
     await expectOwnedTokens(owner1.address, [owner1.address]);
     await expectOwnedTokens(BURN_ADDRESS, []);
@@ -97,6 +92,19 @@ describe("Courage", () => {
     await expectTokenAtIndex(owner1Index, owner1.address);
     await burn(owner1, owner1.address);
     await expectTokenAtIndex(owner1Index, BigNumber.from(1).shl(160).sub(1));
+  });
+
+  it("announces original tokens", async () => {
+    await expect(courage.announceTokens([owner1.address]))
+      .to.emit(courage, "Transfer")
+      .withArgs(owner1.address, owner1.address, owner1.address);
+  });
+
+  it("announces nonoriginal tokens", async () => {
+    await transfer(owner1, owner2, owner1.address);
+    await expect(courage.announceTokens([owner1.address]))
+      .to.emit(courage, "Transfer")
+      .withArgs(owner2.address, owner2.address, owner1.address);
   });
 
   it("returns a tokenURI", async () => {
