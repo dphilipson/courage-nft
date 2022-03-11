@@ -1,17 +1,44 @@
 /** @jsx jsx */
 import { utils } from "ethers";
-import { memo, ReactElement, useCallback, useState } from "react";
-import { Button, jsx } from "theme-ui";
+import { ChangeEvent, memo, ReactElement, useCallback, useState } from "react";
+import { Button, Input, jsx, Text } from "theme-ui";
 import CourageImage from "../components/CourageImage";
 import Trappings from "../components/Trappings";
 
 export default memo(function IndexPage(): ReactElement {
   const [address, setAddress] = useState(getRandomAddress());
-  const reroll = useCallback(() => setAddress(getRandomAddress()), []);
+  const [input, setInput] = useState(address);
+  const [isInvalidAddress, setIsInvalidAddress] = useState(false);
+  const handleInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setInput(event.currentTarget.value);
+      setIsInvalidAddress(false);
+    },
+    [],
+  );
+  const chooseAddress = useCallback(() => {
+    if (!utils.isAddress(input)) {
+      setIsInvalidAddress(true);
+    } else {
+      setAddress(input);
+    }
+  }, [input]);
+  const reroll = useCallback(() => {
+    const randomAddress = getRandomAddress();
+    setAddress(randomAddress);
+    setInput(randomAddress);
+    setIsInvalidAddress(false);
+  }, []);
+
   return (
     <Trappings>
       <CourageImage address={address} />
+      <Input type="text" onChange={handleInputChange} value={input} />
+      <Button onClick={chooseAddress}>Set Address</Button>
       <Button onClick={reroll}>Reroll</Button>
+      <Text sx={{ visibility: isInvalidAddress ? "visible" : "hidden" }}>
+        Invalid address.
+      </Text>
     </Trappings>
   );
 });

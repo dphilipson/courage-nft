@@ -3,7 +3,7 @@ import chai, { expect } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import { BigNumber, BigNumberish, ContractTransaction } from "ethers";
 import { ethers } from "hardhat";
-import { Courage } from "../typechain";
+import { Courage } from "../typechain-types";
 
 chai.use(chaiAsPromised);
 
@@ -24,6 +24,18 @@ describe("Courage", () => {
     const Courage = await ethers.getContractFactory("Courage");
     courage = await Courage.deploy();
     await courage.deployed();
+  });
+
+  it("returns an SVG image in token URI", async () => {
+    const tokenUri = await courage.tokenURI(
+      "0x2f806b2a4a19329a87f17cbc965cbc361141ad9b"
+    );
+    const json = atob(
+      tokenUri.slice("data:application/json;base64,".length)
+    ) as any;
+    const { image } = JSON.parse(json);
+    const svg = atob(image.slice("data:image/svg+xml;base64,".length));
+    expect(svg.startsWith("<svg") && svg.endsWith("</svg>\n")).to.equal(true);
   });
 
   it("starts with tokens for everyone except the burn address", async () => {
