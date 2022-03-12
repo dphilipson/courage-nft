@@ -34,6 +34,12 @@ export default function HtmlHead({
         { name: "twitter:description", content: description },
         // { name: "twitter:image", content: courageLogo },
       ]}
+      link={[
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap",
+        },
+      ]}
     />
   );
 }

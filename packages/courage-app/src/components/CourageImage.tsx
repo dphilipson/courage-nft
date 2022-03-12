@@ -1,10 +1,10 @@
 /** @jsx jsx */
+import { jsx, PropsOf } from "@emotion/react";
 import { memo, ReactElement } from "react";
-import { Image, ImageProps, jsx } from "theme-ui";
 import { chainFrom, range } from "transducist";
 import { Biterator } from "../util/biterator";
 
-export interface CourageImageProps extends ImageProps {
+export interface CourageImageProps extends PropsOf<"img"> {
   address: string;
 }
 
@@ -12,7 +12,7 @@ export default memo(function CourageImage({
   address,
   ...imageProps
 }: CourageImageProps): ReactElement {
-  return <Image {...imageProps} src={toSvgUri(generateSvg(address))} />;
+  return <img {...imageProps} src={toSvgUri(generateSvg(address))} />;
 });
 
 const COLORS: string[] = [
@@ -110,10 +110,6 @@ class ArtIterator {
   private nextColor(): string {
     return COLORS[this.biterator.nextBits(4)];
   }
-}
-
-function nextColor(biterator: Biterator): string {
-  return COLORS[biterator.nextBits(4)];
 }
 
 function toSvgUri(svg: string): string {

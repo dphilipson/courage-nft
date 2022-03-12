@@ -5,7 +5,7 @@ module.exports = {
     siteUrl: `https://courage.dphil.me`,
   },
   plugins: [
-    "gatsby-plugin-theme-ui",
+    "gatsby-plugin-emotion",
     // {
     //   resolve: "gatsby-plugin-google-analytics",
     //   options: {
@@ -30,5 +30,6 @@ module.exports = {
       },
       __key: "images",
     },
+    "gatsby-theme-material-ui",
   ],
 };

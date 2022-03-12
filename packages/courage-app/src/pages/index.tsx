@@ -1,7 +1,9 @@
 /** @jsx jsx */
+import { jsx } from "@emotion/react";
+import { Button, Input, Typography } from "@mui/material";
 import { utils } from "ethers";
 import { ChangeEvent, memo, ReactElement, useCallback, useState } from "react";
-import { Button, Input, jsx, Text } from "theme-ui";
+import Container from "../components/Container";
 import CourageImage from "../components/CourageImage";
 import Trappings from "../components/Trappings";
 
@@ -32,13 +34,17 @@ export default memo(function IndexPage(): ReactElement {
 
   return (
     <Trappings>
-      <CourageImage address={address} />
-      <Input type="text" onChange={handleInputChange} value={input} />
-      <Button onClick={chooseAddress}>Set Address</Button>
-      <Button onClick={reroll}>Reroll</Button>
-      <Text sx={{ visibility: isInvalidAddress ? "visible" : "hidden" }}>
-        Invalid address.
-      </Text>
+      <Container>
+        <CourageImage address={address} />
+        <Input type="text" onChange={handleInputChange} value={input} />
+        <Button onClick={chooseAddress}>Set Address</Button>
+        <Button onClick={reroll}>Reroll</Button>
+        <Typography
+          css={{ visibility: isInvalidAddress ? "visible" : "hidden" }}
+        >
+          Invalid address.
+        </Typography>
+      </Container>
     </Trappings>
   );
 });
