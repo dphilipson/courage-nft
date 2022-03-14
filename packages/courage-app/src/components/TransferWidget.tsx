@@ -60,15 +60,15 @@ export default memo(function TransferWidget({
           <Typography>Transfer</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {network != null && network !== EthNetwork.RINKEBY ? (
-            <Typography variant="body1" color="warning.main">
-              Please switch your wallet to Rinkeby to continue.
-            </Typography>
-          ) : currentAccount &&
-            currentAccount.toLowerCase() !== owner.toLowerCase() ? (
+          {currentAccount &&
+          currentAccount.toLowerCase() !== owner.toLowerCase() ? (
             <Typography variant="body2">
               You can only transfer a token you own.{" "}
               <Link to="/">View your tokens.</Link>
+            </Typography>
+          ) : network != null && network !== EthNetwork.RINKEBY ? (
+            <Typography variant="body1" color="warning.main">
+              To transfer this token, switch your wallet to Rinkeby.
             </Typography>
           ) : signer ? (
             <>

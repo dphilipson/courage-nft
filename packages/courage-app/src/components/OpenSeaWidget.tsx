@@ -60,8 +60,8 @@ export default memo(function OpenSeaWidget({
             </Link>
           </Typography>
           {network != null && network !== EthNetwork.RINKEBY ? (
-            <Typography>
-              Please switch your wallet to Rinkeby to continue.
+            <Typography variant="body1" color="warning.main">
+              To announce this token, switch your wallet to Rinkeby.
             </Typography>
           ) : signer ? (
             <TransactionButton
