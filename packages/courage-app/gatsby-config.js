@@ -32,5 +32,6 @@ module.exports = {
     },
     "gatsby-theme-material-ui",
     "gatsby-plugin-use-query-params",
+    "gatsby-plugin-layout",
   ],
 };

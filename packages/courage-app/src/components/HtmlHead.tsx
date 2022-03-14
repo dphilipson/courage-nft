@@ -17,7 +17,6 @@ export default function HtmlHead({
   return (
     <Helmet
       htmlAttributes={{ lang: "en" }}
-      title={title}
       meta={[
         { name: "description", content: description },
         {

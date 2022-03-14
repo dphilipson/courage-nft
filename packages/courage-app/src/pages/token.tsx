@@ -1,20 +1,22 @@
 /** @jsx jsx */
+/** @jsxFrag Fragment */
 import { jsx } from "@emotion/react";
 import { navigate } from "gatsby";
-import { memo, ReactElement } from "react";
+import { Fragment, memo, ReactElement } from "react";
 import { StringParam, useQueryParam } from "use-query-params";
+import Title from "../components/Title";
 import TokenView from "../components/TokenView";
-import Trappings from "../components/Trappings";
 
-export default memo(function TokenPage(): ReactElement {
+export default memo(function TokenPage(): ReactElement | null {
   const tokenId = useQueryParam("id", StringParam)[0] ?? undefined;
   // Don't navigate in SSR.
   if (!tokenId && typeof window !== "undefined") {
     navigate("/");
   }
-  return (
-    <Trappings title="Token">
-      {tokenId ? <TokenView tokenId={tokenId} /> : undefined}
-    </Trappings>
-  );
+  return tokenId ? (
+    <>
+      <Title title="View Token" />
+      <TokenView tokenId={tokenId} />
+    </>
+  ) : null;
 });
