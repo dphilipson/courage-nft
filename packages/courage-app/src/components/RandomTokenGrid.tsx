@@ -37,6 +37,9 @@ export default memo(function RandomTokenGrid({
 });
 
 function getRandomTokenId(): string {
+  if (typeof window === "undefined") {
+    return "0";
+  }
   return BigNumber.from(getRandomAddress()).toString();
 }
 

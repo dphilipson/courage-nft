@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { BigNumberish } from "ethers";
-import { useQuery, UseQueryResult } from "react-query";
+import { useCallback } from "react";
+import { useQuery, useQueryClient, UseQueryResult } from "react-query";
 import { chainFrom, range } from "transducist";
 
 import { TokenMetadata } from "../types";
@@ -14,6 +15,14 @@ export function useTokenOwner(
     ["tokenOwner", tokenId?.toString()],
     () => courage.ownerOf(tokenId!),
     { enabled: tokenId != null },
+  );
+}
+
+export function useInvalidateOwner(tokenId: BigNumberish): () => void {
+  const queryClient = useQueryClient();
+  return useCallback(
+    () => queryClient.invalidateQueries(["tokenOwner", tokenId.toString()]),
+    [tokenId],
   );
 }
 

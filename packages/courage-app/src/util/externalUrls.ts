@@ -1,11 +1,18 @@
 import { CONTRACT_ADDRESS } from "../constants";
 
-export function getEtherscanUrl(address: string): string {
+export function getEtherscanAddressUrl(address: string): string {
   return `https://rinkeby.etherscan.io/address/${address}`;
 }
 
+export function getEtherscanTokenUrl(
+  contractAddress: string,
+  tokenId: string,
+): string {
+  return `https://rinkeby.etherscan.io/token/${contractAddress}?a=${tokenId}`;
+}
+
 export function getEtherscanTransactionUrl(txHash: string): string {
-  return `https://rinkeby.etherscan.io/txt/${txHash}`;
+  return `https://rinkeby.etherscan.io/tx/${txHash}`;
 }
 
 export function getOpenSeaUrl(tokenId: string): string {

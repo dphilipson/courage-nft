@@ -8,7 +8,8 @@ import Trappings from "../components/Trappings";
 
 export default memo(function TokenPage(): ReactElement {
   const tokenId = useQueryParam("id", StringParam)[0] ?? undefined;
-  if (!tokenId) {
+  // Don't navigate in SSR.
+  if (!tokenId && typeof window !== "undefined") {
     navigate("/");
   }
   return (

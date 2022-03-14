@@ -20,6 +20,7 @@ export interface TransactionButtonProps extends BoxProps {
   waitingText: string;
   completeText: string;
   sendTransaction: () => Promise<ContractTransaction>;
+  postSuccess?: () => void;
 }
 
 export default memo(function TransactionButton({
@@ -28,6 +29,7 @@ export default memo(function TransactionButton({
   waitingText,
   completeText,
   sendTransaction,
+  postSuccess,
   ...boxProps
 }: TransactionButtonProps): ReactElement {
   const [status, setStatus] = useState(Status.NOT_STARTED);
@@ -44,11 +46,12 @@ export default memo(function TransactionButton({
       setTxHash(tx.hash);
       await tx.wait();
       setStatus(Status.COMPLETE);
+      postSuccess?.();
     } catch (error: any) {
       setStatus(Status.NOT_STARTED);
       setError(error);
     }
-  }, []);
+  }, [sendTransaction, postSuccess]);
 
   return (
     <Box {...boxProps}>

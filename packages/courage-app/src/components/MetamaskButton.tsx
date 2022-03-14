@@ -13,8 +13,11 @@ export interface MetamaskButtonProps {
 export default memo(function MetamaskButton({
   unconnectedText = "Connect wallet",
   color = "primary",
-}: MetamaskButtonProps): ReactElement {
+}: MetamaskButtonProps): ReactElement | null {
   const { isInstalled, isConnecting, currentAccount, connect } = useMetamask();
+  if (typeof window === "undefined") {
+    return null;
+  }
   return (
     <Button
       sx={{

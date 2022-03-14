@@ -45,8 +45,8 @@ export default memo(function LoadedTokenCard({
             Id: {shortenTokenId(tokenId)}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Owner:{" "}
-            {currentAccount === owner ? "you" : shortenAddress(checksumOwner)}
+            Owner: {shortenAddress(checksumOwner)}
+            {currentAccount?.toLowerCase() === owner.toLowerCase() && " (you)"}
           </Typography>
         </CardContent>
       </Link>
