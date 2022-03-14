@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import { Warning } from "@mui/icons-material";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import OpenInNew from "@mui/icons-material/OpenInNew";
+import Warning from "@mui/icons-material/Warning";
 import {
   Accordion,
   AccordionDetails,

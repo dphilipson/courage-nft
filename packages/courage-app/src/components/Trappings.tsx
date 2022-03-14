@@ -8,6 +8,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { Link } from "gatsby-theme-material-ui";
 import { Fragment, memo, ReactElement, ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MetamaskProvider } from "../on-chain/metamask";
@@ -40,11 +41,13 @@ export default memo(function Trappings({
         <MetamaskProvider>
           <AppBar>
             <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h6">Carbonated Courage</Typography>
+              <Link sx={{ color: "white", textDecoration: "none" }} to="/">
+                <Typography variant="h6">Carbonated Courage</Typography>
+              </Link>
               <MetamaskButton color="success" />
             </Toolbar>
           </AppBar>
-          <Container fixed sx={{ pt: "96px" }}>
+          <Container fixed sx={{ pt: "96px", pb: "48px" }}>
             {children}
           </Container>
         </MetamaskProvider>

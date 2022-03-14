@@ -61,7 +61,7 @@ export default memo(function TransferWidget({
           {currentAccount && currentAccount !== owner ? (
             <Typography variant="body2">
               You can only transfer a token you own.{" "}
-              <Link to="/?filter=owned">View your tokens.</Link>
+              <Link to="/">View your tokens.</Link>
             </Typography>
           ) : signer ? (
             <>

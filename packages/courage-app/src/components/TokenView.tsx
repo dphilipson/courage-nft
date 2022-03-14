@@ -17,11 +17,13 @@ export default memo(function TokenView({
 
   if (owner.isError) {
     return <Typography>Error loading owner: {owner.error.message}</Typography>;
-  } else if (metadata.isError) {
+  }
+  if (metadata.isError) {
     return (
       <Typography>Error loading metadata: {metadata.error.message}</Typography>
     );
-  } else if (!metadata.isSuccess || !owner.isSuccess) {
+  }
+  if (!metadata.isSuccess || !owner.isSuccess) {
     return <CircularProgress />;
   }
   return (

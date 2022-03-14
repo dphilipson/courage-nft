@@ -29,14 +29,18 @@ export function useTokenMetadata(
 
 export function useTokensOwnedBy(
   owner: string | undefined,
-): UseQueryResult<BigNumberish[], Error> {
+): UseQueryResult<string[], Error> {
   return useQuery(
     ["ownedBy", owner],
     async () => {
       const tokenCount = await courage.balanceOf(owner!);
       return Promise.all(
         chainFrom(range(+tokenCount))
-          .map((i) => courage.tokenOfOwnerByIndex(owner!, i))
+          .map((i) =>
+            courage
+              .tokenOfOwnerByIndex(owner!, i)
+              .then((tokenId) => tokenId.toString()),
+          )
           .toArray(),
       );
     },
