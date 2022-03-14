@@ -1,4 +1,4 @@
-declare module "*.svg" {
+declare module "*.png" {
   const url: string;
   export default url;
 }

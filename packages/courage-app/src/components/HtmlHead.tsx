@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Helmet } from "react-helmet";
-import courageLogo from "../images/courageLogo.svg";
+import courageLogo from "../images/courageLogo.png";
 
 const DEFAULT_DESCRIPTION =
   "The token you had all along, even if you didn't know it.";
