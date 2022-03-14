@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { Helmet } from "react-helmet";
+import courageLogo from "../images/courageLogo.svg";
 
 const DEFAULT_DESCRIPTION =
   "The token you had all along, even if you didn't know it.";
@@ -26,13 +27,13 @@ export default function HtmlHead({
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "website" },
-        // { property: "og:image", content: courageLogo },
+        { property: "og:image", content: courageLogo },
         { name: "twitter:card", content: "summary" },
         { name: "twitter:site:id", content: "1389683026762764290" },
         { name: "twitter:creator:id", content: "1389683026762764290" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
-        // { name: "twitter:image", content: courageLogo },
+        { name: "twitter:image", content: courageLogo },
       ]}
       link={[
         {

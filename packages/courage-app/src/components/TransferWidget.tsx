@@ -22,7 +22,7 @@ import {
   useState,
 } from "react";
 import { courage } from "../on-chain/contracts";
-import { useMetamask } from "../on-chain/metamask";
+import { EthNetwork, useMetamask } from "../on-chain/metamask";
 import { useInvalidateOwner } from "../on-chain/queries";
 import MetamaskButton from "./MetamaskButton";
 import TransactionButton from "./TransactionButton";
@@ -37,7 +37,7 @@ export default memo(function TransferWidget({
   owner,
   ...boxProps
 }: TransferWidgetProps): ReactElement {
-  const { currentAccount, signer } = useMetamask();
+  const { network, currentAccount, signer } = useMetamask();
   const invalidateOwner = useInvalidateOwner(tokenId);
   const [to, setTo] = useState("");
 
@@ -60,8 +60,12 @@ export default memo(function TransferWidget({
           <Typography>Transfer</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {currentAccount &&
-          currentAccount.toLowerCase() !== owner.toLowerCase() ? (
+          {network != null && network !== EthNetwork.RINKEBY ? (
+            <Typography variant="body1" color="warning.main">
+              Please switch your wallet to Rinkeby to continue.
+            </Typography>
+          ) : currentAccount &&
+            currentAccount.toLowerCase() !== owner.toLowerCase() ? (
             <Typography variant="body2">
               You can only transfer a token you own.{" "}
               <Link to="/">View your tokens.</Link>
