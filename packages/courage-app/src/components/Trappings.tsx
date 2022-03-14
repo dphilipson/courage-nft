@@ -1,15 +1,28 @@
 /** @jsx jsx */
 /** @jsxFrag Fragment */
 import { jsx } from "@emotion/react";
-import { CssBaseline } from "@mui/material";
+import {
+  AppBar,
+  Container,
+  CssBaseline,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { Fragment, memo, ReactElement, ReactNode } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { MetamaskProvider } from "../on-chain/metamask";
 import HtmlHead from "./HtmlHead";
+import MetamaskButton from "./MetamaskButton";
 
 export interface TrappingsProps {
   title?: string;
   description?: string;
   children: ReactNode;
 }
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
+});
 
 export default memo(function Trappings({
   title,
@@ -23,7 +36,19 @@ export default memo(function Trappings({
         description={description}
       />
       <CssBaseline />
-      {children}
+      <QueryClientProvider client={queryClient}>
+        <MetamaskProvider>
+          <AppBar>
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h6">Carbonated Courage</Typography>
+              <MetamaskButton color="success" />
+            </Toolbar>
+          </AppBar>
+          <Container fixed sx={{ pt: "96px" }}>
+            {children}
+          </Container>
+        </MetamaskProvider>
+      </QueryClientProvider>
     </>
   );
 });

@@ -1,21 +1,19 @@
 /** @jsx jsx */
-import { jsx, PropsOf } from "@emotion/react";
+import { jsx } from "@emotion/react";
+import { Box, BoxProps } from "@mui/material";
 import { memo, ReactElement } from "react";
+import { mq } from "../util/breakpoints";
 
-export interface ContainerProps extends PropsOf<"div"> {
+export interface ContainerProps extends BoxProps {
   small?: boolean;
 }
-
-const BREAKPOINTS = [576, 768, 992, 1200, 1400];
-const mq = BREAKPOINTS.map((bp) => `@media (min-width: ${bp}px)`);
-
 export default memo(function Container({
   small,
-  ...divProps
+  ...boxProps
 }: ContainerProps): ReactElement {
   return (
-    <div
-      {...divProps}
+    <Box
+      {...boxProps}
       css={{
         width: "100%",
         paddingRight: ".75rem",

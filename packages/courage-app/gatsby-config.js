@@ -31,5 +31,6 @@ module.exports = {
       __key: "images",
     },
     "gatsby-theme-material-ui",
+    "gatsby-plugin-use-query-params",
   ],
 };
