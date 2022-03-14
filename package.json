@@ -10,9 +10,11 @@
   ],
   "scripts": {
     "build": "yarn workspace courage-sc prepare && yarn workspace courage-app build",
+    "deploy": "source .env && yarn build && netlify deploy --dir packages/courage-app/public",
     "develop": "lerna run develop --stream"
   },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "netlify-cli": "^9.13.1"
   }
 }
