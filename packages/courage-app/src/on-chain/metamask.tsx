@@ -11,21 +11,15 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { chainFrom } from "transducist";
+import { NETWORK } from "../constants";
+import { EthNetwork } from "../types";
 
 /** EIP-1193 userRejectedRequest error. */
 export const USER_REJECTED = 4001;
 
 const ethereum =
   typeof window === "undefined" ? undefined : (window as any).ethereum;
-
-export enum EthNetwork {
-  MAINNET = "mainnet",
-  ROPSTEN = "ropsten",
-  RINKEBY = "rinkeby",
-  GOERLI = "goerli",
-  KOVAN = "kovan",
-  HARDHAT = "hardhat",
-}
 
 const networksByChainId: Record<number, EthNetwork> = {
   1: EthNetwork.MAINNET,
@@ -36,6 +30,13 @@ const networksByChainId: Record<number, EthNetwork> = {
   31337: EthNetwork.HARDHAT,
 };
 
+const chainIdsByNetwork: Record<EthNetwork, number> = chainFrom(
+  Object.entries(networksByChainId),
+).toObject(
+  ([, network]) => network,
+  ([id]) => +id,
+);
+
 export interface MetamaskState {
   isInstalled: boolean;
   isInitialized: boolean;
@@ -45,7 +46,7 @@ export interface MetamaskState {
   network: EthNetwork | undefined;
   currentAccount: string | undefined;
   signer: Signer | undefined;
-  connect(): Promise<void>;
+  connect(network?: EthNetwork): Promise<void>;
 }
 
 const MetamaskContext = createContext<MetamaskState>(undefined as any);
@@ -82,7 +83,7 @@ export const MetamaskProvider = memo(function MetamaskProvider({
     ethereum.on("accountsChanged", handleAccountsChanged);
   }, []);
 
-  const connect = useCallback(async () => {
+  const connect = useCallback(async (network?: EthNetwork) => {
     if (!isInstalled) {
       throw new Error("Cannot connect when no provider is installed.");
     }
@@ -91,6 +92,12 @@ export const MetamaskProvider = memo(function MetamaskProvider({
     let accounts: string[];
     try {
       accounts = await ethereum.request({ method: "eth_requestAccounts" });
+      if (network) {
+        await ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: `0x${chainIdsByNetwork[network].toString(16)}` }],
+        });
+      }
     } catch (error: any) {
       if (error.code === USER_REJECTED) {
         setUserRejected(true);
@@ -137,27 +144,28 @@ export const MetamaskProvider = memo(function MetamaskProvider({
     return new providers.Web3Provider(ethereum).getSigner();
   }, [currentAccount]);
 
-  const value = useMemo(
-    (): MetamaskState => ({
+  const value = useMemo((): MetamaskState => {
+    const network = chainId != null ? networksByChainId[chainId] : undefined;
+    const isCorrectNetwork = !network || network === NETWORK;
+    return {
       isInstalled,
       isInitialized,
       isConnecting,
       userRejected,
       chainId,
       network: chainId != null ? networksByChainId[chainId] : undefined,
-      currentAccount,
-      signer,
+      currentAccount: isCorrectNetwork ? currentAccount : undefined,
+      signer: isCorrectNetwork ? signer : undefined,
       connect,
-    }),
-    [
-      isInstalled,
-      isInitialized,
-      isConnecting,
-      userRejected,
-      chainId,
-      currentAccount,
-    ],
-  );
+    };
+  }, [
+    isInstalled,
+    isInitialized,
+    isConnecting,
+    userRejected,
+    chainId,
+    currentAccount,
+  ]);
 
   return (
     <MetamaskContext.Provider value={value}>

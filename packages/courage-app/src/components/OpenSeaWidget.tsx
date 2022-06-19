@@ -14,7 +14,8 @@ import { BoxProps } from "@mui/system";
 import { Link } from "gatsby-theme-material-ui";
 import { memo, ReactElement, useCallback } from "react";
 import { courage } from "../on-chain/contracts";
-import { EthNetwork, useMetamask } from "../on-chain/metamask";
+import { useMetamask } from "../on-chain/metamask";
+import { EthNetwork } from "../types";
 import { getOpenSeaUrl } from "../util/externalUrls";
 import MetamaskButton from "./MetamaskButton";
 import TransactionButton from "./TransactionButton";
@@ -59,11 +60,7 @@ export default memo(function OpenSeaWidget({
               View on OpenSea <OpenInNew fontSize="small" sx={{ ml: "4px" }} />
             </Link>
           </Typography>
-          {network != null && network !== EthNetwork.RINKEBY ? (
-            <Typography variant="body1" color="warning.main">
-              To announce this token, switch your wallet to Rinkeby.
-            </Typography>
-          ) : signer ? (
+          {signer ? (
             <TransactionButton
               notStartedText="Announce token"
               waitingText="Announcing…"

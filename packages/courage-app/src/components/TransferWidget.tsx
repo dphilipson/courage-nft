@@ -22,8 +22,9 @@ import {
   useState,
 } from "react";
 import { courage } from "../on-chain/contracts";
-import { EthNetwork, useMetamask } from "../on-chain/metamask";
+import { useMetamask } from "../on-chain/metamask";
 import { useInvalidateOwner } from "../on-chain/queries";
+import { EthNetwork } from "../types";
 import MetamaskButton from "./MetamaskButton";
 import TransactionButton from "./TransactionButton";
 
@@ -65,10 +66,6 @@ export default memo(function TransferWidget({
             <Typography variant="body2">
               You can only transfer a token you own.{" "}
               <Link to="/">View your tokens.</Link>
-            </Typography>
-          ) : network != null && network !== EthNetwork.RINKEBY ? (
-            <Typography variant="body1" color="warning.main">
-              To transfer this token, switch your wallet to Rinkeby.
             </Typography>
           ) : signer ? (
             <>

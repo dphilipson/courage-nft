@@ -22,7 +22,7 @@ describe("Courage", () => {
 
   beforeEach(async () => {
     const Courage = await ethers.getContractFactory("Courage");
-    courage = await Courage.deploy();
+    courage = (await Courage.deploy()) as Courage;
     await courage.deployed();
   });
 

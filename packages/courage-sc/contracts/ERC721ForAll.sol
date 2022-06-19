@@ -74,6 +74,11 @@ contract ERC721ForAll is
         _symbol = symbol_;
     }
 
+    /**
+     * Emits transfers events for the specified tokens from their owners to
+     * themselves. This can make tokens visible to services like OpenSea that
+     * only recognize a token once it has appeared in a Transfer event.
+     */
     function announceTokens(uint256[] calldata tokenIds) public {
         for (uint256 i = 0; i < tokenIds.length; i++) {
             uint256 tokenId = tokenIds[i];

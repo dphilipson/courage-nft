@@ -18,10 +18,11 @@ async function main() {
   // We get the contract to deploy
   const Courage = await ethers.getContractFactory("Courage");
   const courage = await Courage.deploy();
-
+  console.log("Sent deploy transation. Waiting for mining.");
   await courage.deployed();
-
   console.log("Courage deployed to:", courage.address);
+  const receipt = await courage.deployTransaction.wait();
+  console.log("Gas used: ", +receipt.gasUsed);
   console.log("Waiting for confirmations before verifying on Etherscan.");
   for (let i = 0; i < CONFIRMATIONS; i++) {
     console.log("Confirmations remaining:", CONFIRMATIONS - i);

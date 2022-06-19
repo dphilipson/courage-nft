@@ -28,14 +28,23 @@ task("compile").setAction(async (_, __, runSuper) => {
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
-const { ETHERSCAN_API_KEY, RINKEBY_URL, TESTNET_PRIVATE_KEY } = process.env;
+const { ETHERSCAN_API_KEY, MAINNET_URL, GOERLI_URL, RINKEBY_URL, PRIVATE_KEY } =
+  process.env;
 
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
   networks: {
+    mainnet: {
+      url: notNull(MAINNET_URL),
+      accounts: [notNull(PRIVATE_KEY)],
+    },
+    goerli: {
+      url: notNull(GOERLI_URL),
+      accounts: [notNull(PRIVATE_KEY)],
+    },
     rinkeby: {
       url: notNull(RINKEBY_URL),
-      accounts: [notNull(TESTNET_PRIVATE_KEY)],
+      accounts: [notNull(PRIVATE_KEY)],
     },
   },
   gasReporter: {

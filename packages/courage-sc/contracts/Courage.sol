@@ -6,23 +6,23 @@ import "./DataURIs.sol";
 import "./ERC721ForAll.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract Courage is ERC721ForAll("Carbonated Courage 0.0.0", "COUR-0.0.0") {
+contract Courage is ERC721ForAll("Carbonated Courage", "COUR") {
     using Strings for uint256;
     using DataURIs for string;
 
     // Hand-picked to be a pretty good one.
     uint256 private constant CONTRACT_IMAGE_SEED =
-        48045580856097492594019161860723890309844914833;
+        469379910270314646414328754926797194489967926725;
 
     function contractURI() public pure returns (string memory) {
         return
             string(
                 abi.encodePacked(
                     "{\n"
-                    '  "name": "Carbonated Courage v0.0.0",\n'
+                    '  "name": "Carbonated Courage",\n'
                     '  "description": "Courage you had it all along, even if you didn\'t know it.",\n',
                     '  "seller_fee_basis_points": 100,\n'
-                    '  "fee_recipient": "0x696532E83Dd722eaCA2AA611fE381DfAAD143e6C",\n'
+                    '  "fee_recipient": "0xa8Ffa84FE054da6BAb987a8984D4d35f54491A75",\n'
                     '  "image": "',
                     CourageSvgs.generateSvg(CONTRACT_IMAGE_SEED).toSvgURI(),
                     '"\n'

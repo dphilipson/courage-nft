@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, ReactElement } from "react";
 import { Helmet } from "react-helmet";
 
 export interface TitleProps {

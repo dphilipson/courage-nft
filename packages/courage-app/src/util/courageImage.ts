@@ -78,12 +78,17 @@ function generateSvg(address: string): string {
 }
 
 class ArtIterator {
+  private circleIndex = 0;
+
   constructor(private readonly biterator: Biterator) {}
 
   public nextCircle(): CircleProps {
+    const i = this.circleIndex++;
+    const xNudge = i & 3;
+    const yNudge = i >> 1;
     return {
-      cx: this.nextPosition(),
-      cy: this.nextPosition(),
+      cx: this.nextPosition() + xNudge,
+      cy: this.nextPosition() + yNudge,
       r: this.nextRadius(),
       fill: this.nextColor(),
     };

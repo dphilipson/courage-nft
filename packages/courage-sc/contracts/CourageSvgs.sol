@@ -131,10 +131,14 @@ library CourageSvgs {
         returns (CircleProps memory)
     {
         uint8 start = 20 * circleIndex;
+        // Nudges based on circleIndex ensure all images are distinct: we won't
+        // get duplicates by reordering circles.
+        uint8 cxNudge = circleIndex & 3;
+        uint8 cyNudge = circleIndex >> 1;
         return
             CircleProps({
-                cx: readPosition(tokenId, start),
-                cy: readPosition(tokenId, start + 6),
+                cx: readPosition(tokenId, start) + cxNudge,
+                cy: readPosition(tokenId, start + 6) + cyNudge,
                 r: readRadius(tokenId, start),
                 fill: readFill(tokenId, start)
             });
