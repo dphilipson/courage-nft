@@ -48,9 +48,9 @@ export default memo(function IndexView(): ReactElement {
           Although you already own your token and can immediately prove
           ownership or transfer it, some external applications, such as OpenSea,
           may not recognize that you own the token because they are watching for
-          "Transfer" events emitted by the contract, but Carbonated Courage has
-          not emitted an event for each individual token (which is permitted by
-          the ERC-721 standard).
+          "Transfer" events emitted by the contract. Unlike many NFTs,
+          Carbonated Courage has not emitted a mint event for each individual
+          token (which is permitted by the ERC-721 standard).
         </Typography>
         <Typography>
           To work around this, you may "announce" a token to cause the contract
