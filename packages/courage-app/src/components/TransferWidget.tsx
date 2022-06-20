@@ -24,7 +24,6 @@ import {
 import { courage } from "../on-chain/contracts";
 import { useMetamask } from "../on-chain/metamask";
 import { useInvalidateOwner } from "../on-chain/queries";
-import { EthNetwork } from "../types";
 import MetamaskButton from "./MetamaskButton";
 import TransactionButton from "./TransactionButton";
 
@@ -38,7 +37,7 @@ export default memo(function TransferWidget({
   owner,
   ...boxProps
 }: TransferWidgetProps): ReactElement {
-  const { network, currentAccount, signer } = useMetamask();
+  const { currentAccount, signer } = useMetamask();
   const invalidateOwner = useInvalidateOwner(tokenId);
   const [to, setTo] = useState("");
 
@@ -72,7 +71,7 @@ export default memo(function TransferWidget({
               <TextField
                 variant="standard"
                 label="Recipient address"
-                fullWidth={true}
+                fullWidth
                 value={to}
                 onChange={handleToChange}
               />

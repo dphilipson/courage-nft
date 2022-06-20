@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
 import { CircularProgress, Typography } from "@mui/material";
-import { Fragment, memo, ReactElement } from "react";
+import { memo, ReactElement } from "react";
 import { useTokenMetadata, useTokenOwner } from "../on-chain/queries";
 import LoadedTokenView from "./LoadedTokenView";
 
