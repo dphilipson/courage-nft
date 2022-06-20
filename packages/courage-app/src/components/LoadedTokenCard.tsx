@@ -6,6 +6,7 @@ import { Link } from "gatsby-theme-material-ui";
 import { memo, ReactElement } from "react";
 import { useMetamask } from "../on-chain/metamask";
 import { TokenMetadata } from "../types";
+import { mq } from "../util/breakpoints";
 import { shortenAddress, shortenTokenId } from "../util/text";
 
 export interface LoadedTokenCardProps extends CardProps {
@@ -26,13 +27,14 @@ export default memo(function LoadedTokenCard({
     <Card
       {...cardProps}
       sx={{
-        maxWidth: "273px",
+        maxWidth: "100%",
         transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
         "&:hover": {
           transform: "scale(1.04)",
           boxShadow:
             "rgb(0 0 0 / 20%) 0px 2px 4px -1px, rgb(0 0 0 / 14%) 0px 4px 5px 0px, rgb(0 0 0 / 12%) 0px 1px 10px 0px",
         },
+        [mq[0]]: { maxWidth: "273px" },
       }}
     >
       <Link sx={{ textDecoration: "none" }} to={`/token?id=${tokenId}`}>

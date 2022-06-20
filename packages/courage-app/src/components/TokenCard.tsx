@@ -4,6 +4,7 @@ import { Card, CardProps, CircularProgress, Typography } from "@mui/material";
 import { BigNumberish } from "ethers";
 import { memo, ReactElement } from "react";
 import { useTokenMetadata, useTokenOwner } from "../on-chain/queries";
+import { mq } from "../util/breakpoints";
 import LoadedTokenCard from "./LoadedTokenCard";
 
 export interface TokenCardProps extends CardProps {
@@ -38,11 +39,12 @@ export default memo(function TokenCard({
     return (
       <Card
         sx={{
-          width: "273px",
-          height: "400px",
+          width: "100%",
+          height: "470px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          [mq[0]]: { width: "273px", height: "400px" },
         }}
       >
         <CircularProgress />
