@@ -3,7 +3,7 @@
 import { jsx } from "@emotion/react";
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { Link } from "gatsby-theme-material-ui";
-import { Fragment, memo, ReactElement } from "react";
+import { memo, ReactElement } from "react";
 import { mq } from "../util/styles";
 import MetamaskButton from "./MetamaskButton";
 

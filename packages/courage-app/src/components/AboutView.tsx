@@ -1,8 +1,10 @@
 /** @jsx jsx */
-/** @jsxFrag Fragment */
 import { jsx } from "@emotion/react";
 import { Box, BoxProps, Typography } from "@mui/material";
+import { Link } from "gatsby-theme-material-ui";
 import { memo, ReactElement } from "react";
+import { CONTRACT_ADDRESS } from "../constants";
+import { getEtherscanAddressUrl } from "../util/externalUrls";
 
 export default memo(function IndexView(props: BoxProps): ReactElement {
   return (
@@ -40,6 +42,19 @@ export default memo(function IndexView(props: BoxProps): ReactElement {
         Why's it called Carbonated Courage? It's carbonated because it looks
         like bubbles, and it's courage because it's something that you had all
         along.
+      </Typography>
+      <Typography mt="3rem" variant="body1">
+        Contract address: {CONTRACT_ADDRESS} (
+        <Link
+          href={getEtherscanAddressUrl(CONTRACT_ADDRESS)}
+          sx={{
+            textDecoration: "none",
+            ":hover": { textDecoration: "underline" },
+          }}
+        >
+          Etherscan
+        </Link>
+        )
       </Typography>
     </Box>
   );
