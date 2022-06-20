@@ -40,7 +40,12 @@ export default memo(function LoadedTokenCard({
       <Link sx={{ textDecoration: "none" }} to={`/token?id=${tokenId}`}>
         <img css={{ width: "100%", height: "auto" }} src={image} />
         <CardContent>
-          <Typography gutterBottom variant="h6" component="div">
+          <Typography
+            gutterBottom
+            variant="h6"
+            component="div"
+            sx={{ fontSize: "1.125rem" }}
+          >
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
