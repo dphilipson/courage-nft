@@ -39,12 +39,12 @@ export default memo(function TokenCard({
     return (
       <Card
         sx={{
-          width: "100%",
+          maxWidth: "100%",
           height: "470px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          [mq[0]]: { width: "273px", height: "400px" },
+          [mq[0]]: { maxWidth: "273px", height: "400px" },
         }}
       >
         <CircularProgress />
