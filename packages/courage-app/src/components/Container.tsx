@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/react";
 import { Box, BoxProps } from "@mui/material";
 import { memo, ReactElement } from "react";
-import { mq } from "../util/breakpoints";
+import { mq } from "../util/styles";
 
 export interface ContainerProps extends BoxProps {
   small?: boolean;

@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/react";
 import { Box, BoxProps } from "@mui/material";
 import { memo, ReactElement } from "react";
-import { mq } from "../util/breakpoints";
+import { mq } from "../util/styles";
 import TokenCard from "./TokenCard";
 
 export interface TokenGridProps extends BoxProps {
@@ -22,12 +22,14 @@ export default memo(function TokenGrid({
         display: "grid",
         gap: "1.25rem",
         gridTemplateColumns: "1fr",
+        p: "1rem",
         [mq[0]]: {
+          p: 0,
           gridTemplateColumns: "repeat(auto-fit, minmax(250px, 21%))",
         },
       }}
     >
-      {tokenIds.slice(0, 2).map((tokenId) => (
+      {tokenIds.map((tokenId) => (
         <TokenCard key={tokenId} tokenId={tokenId} owner={owner} />
       ))}
     </Box>

@@ -10,6 +10,7 @@ import {
   getEtherscanAddressUrl,
   getEtherscanTokenUrl,
 } from "../util/externalUrls";
+import { mq, ellipsize } from "../util/styles";
 import OpenSeaWidget from "./OpenSeaWidget";
 import TransferWidget from "./TransferWidget";
 
@@ -29,7 +30,11 @@ export default memo(function LoadedTokenView({
   return (
     <Box
       {...boxProps}
-      css={{ display: "grid", gridTemplateColumns: "500px 1fr", gap: "2rem" }}
+      css={{
+        display: "grid",
+        gap: "2rem",
+        [mq[1]]: { gridTemplateColumns: "500px 1fr" },
+      }}
     >
       {renderMetadataPane()}
       {renderMainPane()}
@@ -42,7 +47,22 @@ export default memo(function LoadedTokenView({
         elevation={4}
         sx={{ display: "flex", flexDirection: "column", p: "24px" }}
       >
-        <img src={metadata.image} css={{ alignSelf: "center" }} />
+        <Typography
+          gutterBottom
+          variant="h4"
+          sx={{
+            ...ellipsize,
+            fontSize: "1.5rem",
+            [mq[0]]: { fontSize: "2.125rem" },
+            [mq[1]]: { display: "none" },
+          }}
+        >
+          {metadata.name}
+        </Typography>
+        <img
+          src={metadata.image}
+          css={{ alignSelf: "center", maxWidth: "100%" }}
+        />
         <Typography gutterBottom variant="h5" mt="16px">
           Description
         </Typography>
@@ -55,7 +75,7 @@ export default memo(function LoadedTokenView({
             <Typography variant="body1" color="text.secondary">
               {trait_type}:
             </Typography>
-            <Typography gutterBottom variant="body1" ml="16px">
+            <Typography gutterBottom variant="body1" ml="16px" sx={ellipsize}>
               {value}
             </Typography>
           </Box>
@@ -66,27 +86,32 @@ export default memo(function LoadedTokenView({
 
   function renderMainPane(): ReactElement {
     return (
-      <Box>
-        <Typography gutterBottom variant="h4">
+      <Box sx={{ overflow: "hidden", m: "-10px", p: "10px" }}>
+        <Typography
+          gutterBottom
+          variant="h4"
+          sx={{ ...ellipsize, display: "none", [mq[1]]: { display: "block" } }}
+        >
           {metadata.name}
         </Typography>
-        <Typography gutterBottom variant="body2">
+        <Typography gutterBottom variant="body2" sx={ellipsize}>
           Token ID:{" "}
           <Link
             href={getEtherscanTokenUrl(CONTRACT_ADDRESS, tokenId)}
             target="_blank"
+            sx={ellipsize}
           >
             {tokenId}
           </Link>
         </Typography>
-        <Typography gutterBottom variant="body2">
+        <Typography gutterBottom variant="body2" sx={ellipsize}>
           Owner:{" "}
           <Link href={getEtherscanAddressUrl(owner)} target="_blank">
             {owner}
           </Link>
           {currentAccount?.toLowerCase() === owner.toLowerCase() && " (you)"}
         </Typography>
-        <Typography gutterBottom variant="body2">
+        <Typography gutterBottom variant="body2" sx={ellipsize}>
           Contract:{" "}
           <Link href={getEtherscanAddressUrl(CONTRACT_ADDRESS)} target="_blank">
             {CONTRACT_ADDRESS}

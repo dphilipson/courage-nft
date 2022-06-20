@@ -1,5 +1,8 @@
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
 import {
   AppBar,
+  Box,
   Container,
   CssBaseline,
   Toolbar,
@@ -11,6 +14,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import HtmlHead from "../components/HtmlHead";
 import MetamaskButton from "../components/MetamaskButton";
 import { MetamaskProvider } from "../on-chain/metamask";
+import { mq } from "../util/styles";
 
 export interface LayoutProps {
   children: ReactNode;
@@ -31,10 +35,26 @@ export default memo(function Layout({ children }: LayoutProps): ReactElement {
             <Link sx={{ color: "white", textDecoration: "none" }} to="/">
               <Typography variant="h6">Carbonated Courage</Typography>
             </Link>
-            <MetamaskButton color="success" />
+            <MetamaskButton
+              color="success"
+              css={{ display: "none", [mq[0]]: { display: "inline-flex" } }}
+            />
           </Toolbar>
         </AppBar>
-        <Container fixed sx={{ pt: "96px", pb: "48px" }}>
+        <Container
+          fixed
+          sx={{ pb: "48px", pt: "56px", [mq[0]]: { pt: "96px" } }}
+        >
+          <Box sx={{ display: "flex", justifyContent: "center", my: "1rem" }}>
+            <MetamaskButton
+              color="success"
+              css={{
+                alignSelf: "flex-end",
+                display: "inline-flex",
+                [mq[0]]: { display: "none" },
+              }}
+            />
+          </Box>
           {children}
         </Container>
       </MetamaskProvider>

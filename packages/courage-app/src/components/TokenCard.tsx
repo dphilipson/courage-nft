@@ -4,7 +4,7 @@ import { Card, CardProps, CircularProgress, Typography } from "@mui/material";
 import { BigNumberish } from "ethers";
 import { memo, ReactElement } from "react";
 import { useTokenMetadata, useTokenOwner } from "../on-chain/queries";
-import { mq } from "../util/breakpoints";
+import { mq } from "../util/styles";
 import LoadedTokenCard from "./LoadedTokenCard";
 
 export interface TokenCardProps extends CardProps {

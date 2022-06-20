@@ -6,7 +6,7 @@ import { Link } from "gatsby-theme-material-ui";
 import { memo, ReactElement } from "react";
 import { useMetamask } from "../on-chain/metamask";
 import { TokenMetadata } from "../types";
-import { mq } from "../util/breakpoints";
+import { mq } from "../util/styles";
 import { shortenAddress, shortenTokenId } from "../util/text";
 
 export interface LoadedTokenCardProps extends CardProps {
