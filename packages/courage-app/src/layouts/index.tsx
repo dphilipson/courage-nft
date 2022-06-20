@@ -35,10 +35,26 @@ export default memo(function Layout({ children }: LayoutProps): ReactElement {
             <Link sx={{ color: "white", textDecoration: "none" }} to="/">
               <Typography variant="h6">Carbonated Courage</Typography>
             </Link>
-            <MetamaskButton
-              color="success"
-              css={{ display: "none", [mq[0]]: { display: "inline-flex" } }}
-            />
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Link
+                sx={{
+                  color: "white",
+                  textDecoration: "none",
+                  ":hover": { textDecoration: "underline" },
+                }}
+                to="/about"
+              >
+                <Typography>Learn More</Typography>
+              </Link>
+              <MetamaskButton
+                color="success"
+                css={{
+                  marginLeft: "2rem",
+                  display: "none",
+                  [mq[0]]: { display: "inline-flex" },
+                }}
+              />
+            </Box>
           </Toolbar>
         </AppBar>
         <Container
