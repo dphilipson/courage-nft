@@ -15,7 +15,6 @@ import { Link } from "gatsby-theme-material-ui";
 import { memo, ReactElement, useCallback } from "react";
 import { courage } from "../on-chain/contracts";
 import { useMetamask } from "../on-chain/metamask";
-import { EthNetwork } from "../types";
 import { getOpenSeaUrl } from "../util/externalUrls";
 import MetamaskButton from "./MetamaskButton";
 import TransactionButton from "./TransactionButton";
@@ -28,7 +27,7 @@ export default memo(function OpenSeaWidget({
   tokenId,
   ...boxProps
 }: OpenSeaWidgetProps): ReactElement {
-  const { network, signer } = useMetamask();
+  const { signer } = useMetamask();
 
   const announceToken = useCallback(() => {
     if (!signer) {
@@ -49,6 +48,12 @@ export default memo(function OpenSeaWidget({
             it sees it in a Transfer event. If the following link is a 404, then
             you can manually "announce" the token to trigger such an event, then
             try the link again.
+          </Typography>
+          <Typography gutterBottom variant="body2" color="warning.main">
+            Also, OpenSea may hide the token from your profile. To check, from
+            your profile select the "More" dropdown, then "Hidden". If you see
+            your token there, you can unhide it by clicking the three dots below
+            it and selecting "Unhide".
           </Typography>
           <Typography variant="body1" my="16px">
             <Link
